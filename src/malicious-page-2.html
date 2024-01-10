@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Malicious Page 2 with blocking</title>
+</head>
+
+<body>
+  <h3>Malicious Page 2 with blocking</h1>
+  <script>
+    function blockPage() {
+      setInterval(() => {
+        alert('Malicious script executed!');
+      }, 10)
+    }
+  </script>
+  <button onclick="blockPage()">Block</button>
+</body>
+
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Malicious Page 3 with xss</title>
+</head>
+
+<body>
+  <h3>Malicious Page 3 with xss</h1>
+  <div>(different domain, Same-Origin Policy is disabled)</div>
+  <script>
+    var name = new URLSearchParams(window.location.search).get('name');
+    document.write('<p>Hello, ' + name + '!</p>');
+  </script>
+  <a href="/malicious-page-3?name=<script>alert('XSS!')</script>">Link with xss</a>
+</body>
+
+</html>

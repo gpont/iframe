@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Malicious Page with injection</title>
+</head>
+
+<body>
+  <h3>Malicious Page with injection</h1>
+  <div>(same domain, Same-Origin Policy is enabled)</div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const node = document.createElement('div')
+      node.appendChild(document.createTextNode('Injected code'));
+      window.parent.document.querySelector('body').appendChild(node) // should be the same domain because of Same-Origin Policy
+    });
+  </script>
+</body>
+
+</html>
