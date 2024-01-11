@@ -4,17 +4,37 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Malicious Page 3 with xss</title>
+  <title>Malicious Page 3 with fingerprint</title>
 </head>
 
 <body>
-  <h3>Malicious Page 3 with xss</h1>
+  <h3>Malicious Page 3 with fingerprint</h1>
   <div>(different domain, Same-Origin Policy is disabled)</div>
   <script>
-    var name = new URLSearchParams(window.location.search).get('name');
-    document.write('<p>Hello, ' + name + '!</p>');
+    document.addEventListener('DOMContentLoaded', function () {
+      const fingerprint = {
+        "User Agent": navigator.userAgent,
+        "Screen Resolution": window.screen.width + "x" + window.screen.height,
+        "Color Depth": window.screen.colorDepth,
+        "Timezone Offset": new Date().getTimezoneOffset(),
+        "Language": navigator.language,
+        "Platform": navigator.platform,
+        "Cookies Enabled": navigator.cookieEnabled,
+        "Online Status": navigator.onLine,
+        "Java Enabled": navigator.javaEnabled(),
+        "Browser Plugins": navigator.plugins.length,
+        "Local IP Address": location.hostname,
+      };
+
+      // fetch('...', { data: fingerprint })
+
+      document.body.innerHTML += `<ul>${
+        Object.entries(fingerprint)
+          .map(([key, value]) => '<li>'+key+': '+value+'</li>')
+          .join('')
+      }</ul>`;
+    });
   </script>
-  <a href="/malicious-page-3?name=<script>alert('XSS!')</script>">Link with xss</a>
 </body>
 
 </html>
